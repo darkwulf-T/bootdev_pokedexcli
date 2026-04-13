@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -14,6 +15,11 @@ func main() {
 		userI := scanner.Text()
 		cleanUserI := cleanInput(userI)
 		firstW := cleanUserI[0]
-		fmt.Printf("Your command was: %s\n", firstW)
+		
+		val, ok := getCommands()[firstW]
+		if !ok {
+			fmt.Println("Unknown command")
+		}
+		val.callback()
 	}
 }
