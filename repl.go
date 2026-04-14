@@ -4,12 +4,19 @@ import(
 	"strings"
 	"fmt"
 	"os"
+	"github.com/darkwulf-T/bootdev_pokedexcli/pokeapi"
 )
 
 type cliCommand struct {
 	name 		string
 	description string
-	callback 	func() error
+	callback 	func(con *config) error
+}
+
+type config struct {
+	next 			*string 
+	previous 		*string
+	pokeapiClient 	pokeapi.Client
 }
 
 
@@ -30,16 +37,26 @@ func getCommands() map[string]cliCommand {
 			description: 	"Displays a help message",
 			callback: 		commandHelp,
 		},
+		"map": {
+			name: 			"map",
+			description: 	"Displays location from the pokeapi. Consecutive calls advance up the pages",
+			callback: 		commandMapf,
+		},
+		"mapb": {
+			name: 			"mapb",
+			description: 	"Displays location from the previous page from the pokeapi",
+			callback: 		commandMapb,
+		},
 	}
 }
 
-func commandExit() error {
+func commandExit(con *config) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil
 }
 
-func commandHelp() error {
+func commandHelp(con *config) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println("")
