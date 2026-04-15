@@ -4,12 +4,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"github.com/darkwulf-T/bootdev_pokedexcli/internal/pokecache"
 )
 
 func (c *Client) RequestFunction(url *string) (ResponseApi, error) {
 	endpoint := baseUrl + "/location-area"
 	if url != nil {
 		endpoint = *url
+	}
+
+	if data, ok := c.cache.Get(endpoint); ok {
+		var response ResponseApi
+		if err := json.Unmarshal(data, &response); err != nil {
+			return ResponseApi{}, fmt.Errorf("Error while unmarshalling: %w", err)
+		}
+	
+		return response, nil
 	}
 
 	res, err := c.httpClient.Get(endpoint)
@@ -22,6 +32,8 @@ func (c *Client) RequestFunction(url *string) (ResponseApi, error) {
 	if err != nil {
 		return ResponseApi{}, fmt.Errorf("Error reading the response: %w", err)
 	}
+
+	c.cache.Add(endpoint, data)
 
 	var response ResponseApi
 	if err := json.Unmarshal(data, &response); err != nil {
