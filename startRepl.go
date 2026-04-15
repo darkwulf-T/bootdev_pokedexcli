@@ -18,6 +18,7 @@ func startRepl(con *config) {
 		cmd, ok := getCommands()[firstW]
 		if !ok {
 			fmt.Println("Unknown command")
+			continue
 		}
 		err := cmd.callback(con)
 		if err != nil {

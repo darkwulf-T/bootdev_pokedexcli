@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"github.com/darkwulf-T/bootdev_pokedexcli/internal/pokecache"
 )
 
 func (c *Client) RequestFunction(url *string) (ResponseApi, error) {
