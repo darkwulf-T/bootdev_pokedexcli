@@ -29,7 +29,14 @@ func startRepl(con *config) {
 			}
 		case "catch":
 			if len(cleanUserI) < 2 {
-				fmt.Println("An Pokemon must be selected")
+				fmt.Println("A Pokemon must be selected")
+				continue
+			} else {
+				secondarg = cleanUserI[1]
+			}
+		case "inspect":
+			if len(cleanUserI) < 2 {
+				fmt.Println("A Pokemon must be seleceted")
 				continue
 			} else {
 				secondarg = cleanUserI[1]
