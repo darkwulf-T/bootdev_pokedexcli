@@ -52,16 +52,21 @@ func getCommands() map[string]cliCommand {
 			description: "Shows all Pokemon in a selected area",
 			callback:    commandExplore,
 		},
+		"catch": {
+			name:        "catch",
+			description: "Try to catch a selected Pokemon",
+			callback:    commandCatch,
+		},
 	}
 }
 
-func commandExit(con *config, areaName string) error {
+func commandExit(con *config, secondarg string) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil
 }
 
-func commandHelp(con *config, areaName string) error {
+func commandHelp(con *config, secondarg string) error {
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")
 	fmt.Println("")

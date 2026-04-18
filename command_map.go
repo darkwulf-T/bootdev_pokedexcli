@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandMapf(con *config, areaName string) error {
+func commandMapf(con *config, secondarg string) error {
 	response, err := con.pokeapiClient.RequestFunction(con.next)
 	if err != nil {
 		return err
@@ -15,7 +15,7 @@ func commandMapf(con *config, areaName string) error {
 	return nil
 }
 
-func commandMapb(con *config, areaName string) error {
+func commandMapb(con *config, secondarg string) error {
 	if con.previous == nil {
 		return fmt.Errorf("This is the first page")
 	}

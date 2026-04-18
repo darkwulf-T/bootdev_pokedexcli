@@ -14,14 +14,23 @@ func startRepl(con *config) {
 		userI := scanner.Text()
 		cleanUserI := cleanInput(userI)
 		firstW := cleanUserI[0]
-		areaName := ""
-		if firstW == "explore" {
+		secondarg := ""
+		switch firstW {
+		case "explore":
 			if len(cleanUserI) < 2 {
 				fmt.Println("An area must be selected")
 				continue
 			} else {
-				areaName = cleanUserI[1]
+				secondarg = cleanUserI[1]
 			}
+		case "catch":
+			if len(cleanUserI) < 2 {
+				fmt.Println("An Pokemon must be selected")
+				continue
+			} else {
+				secondarg = cleanUserI[1]
+			}
+		default:
 		}
 
 		cmd, ok := getCommands()[firstW]
@@ -29,7 +38,7 @@ func startRepl(con *config) {
 			fmt.Println("Unknown command")
 			continue
 		}
-		err := cmd.callback(con, areaName)
+		err := cmd.callback(con, secondarg)
 		if err != nil {
 			fmt.Println(err)
 		}
