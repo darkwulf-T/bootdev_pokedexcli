@@ -21,3 +21,11 @@ func commandInspect(con *config, secondarg string) error {
 	}
 	return nil
 }
+
+func commandPokedex(con *config, secondarg string) error {
+	fmt.Println("Your Pokedex:")
+	for p := range con.Pokedex {
+		fmt.Printf("   -%s\n", p)
+	}
+	return nil
+}
