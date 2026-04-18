@@ -8,11 +8,7 @@ import (
 func commandCatch(con *config, secondarg string) error {
 	pokemon, err := con.pokeapiClient.CatchResponse(secondarg)
 	if err != nil {
-		if err == fmt.Errorf("Error with the GET request: Not Found") {
-			return fmt.Errorf("The choosen Pokemon either don't exist or is not available. Please select an existing Pokemon.")
-		} else {
-			return err
-		}
+		return err
 	}
 
 	fmt.Printf("Throwing a Pokeball at %s...\n", secondarg)
@@ -24,5 +20,7 @@ func commandCatch(con *config, secondarg string) error {
 		return nil
 	}
 	fmt.Printf("%s was caught!\n", pokemon.Name)
+	con.Pokedex[pokemon.Name] = pokemon
+
 	return nil
 }

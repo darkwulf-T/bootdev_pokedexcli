@@ -18,6 +18,7 @@ type config struct {
 	next          *string
 	previous      *string
 	pokeapiClient pokeapi.Client
+	Pokedex       map[string]pokeapi.Pokemon
 }
 
 func cleanInput(text string) []string {

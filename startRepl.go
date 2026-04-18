@@ -13,6 +13,10 @@ func startRepl(con *config) {
 		scanner.Scan()
 		userI := scanner.Text()
 		cleanUserI := cleanInput(userI)
+		if len(cleanUserI) == 0 {
+			fmt.Println("Please select a command. Use help to get an overview of all commands.")
+			continue
+		}
 		firstW := cleanUserI[0]
 		secondarg := ""
 		switch firstW {

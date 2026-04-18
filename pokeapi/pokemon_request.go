@@ -22,7 +22,7 @@ func (c *Client) CatchResponse(name string) (Pokemon, error) {
 
 	var response Pokemon
 	if err := json.Unmarshal(data, &response); err != nil {
-		return Pokemon{}, fmt.Errorf("Error while unmarshalling: %w", err)
+		return Pokemon{}, fmt.Errorf("The chosen Pokemon either doesn't exist or isn't available. Please select a valid Pokemon.")
 	}
 
 	return response, nil
